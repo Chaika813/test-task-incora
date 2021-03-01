@@ -48,7 +48,7 @@ export default function CardUser(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button size="small" color="primary" onClick={defineCurrentUser}>
           <Link to={`/posts/${id}`}>Posts</Link>
         </Button>
       </CardActions>

@@ -25,7 +25,7 @@ function App() {
           <Route path="/posts/:id/post/:postId">
             <Post />
           </Route>
-          <Route path="/posts/:id/post/:postId/edit">
+          <Route sensitive path="/posts/:id/post/:postId/edit">
             <PostEdit />
           </Route>
         </Switch>

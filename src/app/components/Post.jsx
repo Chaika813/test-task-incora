@@ -64,11 +64,6 @@ export default function RecipeReviewCard() {
     dispatch(fetchComments({ postId }))
   }, [])
 
-  const goToEditPage = () => {
-    return (
-      <PostEdit />
-    )
-  }
 
   return (
     <Container>
@@ -89,9 +84,7 @@ export default function RecipeReviewCard() {
         </CardContent>
         <CardActions disableSpacing>
           <Button aria-label="edit">
-            
-            <Link to='/posts/:id/post/:postId/edit'> <EditIcon /></Link>
-          
+            <Link to={`/posts/${currentUser.id}/post/${currentPost.id}/edit`}> <EditIcon /></Link>
           </Button>
           <IconButton aria-label="share">
             <DeleteIcon />
