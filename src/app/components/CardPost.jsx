@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Link
 } from "react-router-dom";
+import {useSelector, useDispatch} from 'react-redux';
+import {currentPost} from './../actions/postsActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -21,6 +23,14 @@ export default function CardPost(props) {
 
   const { id, title, body, userId } = props;
 
+  const dispatch = useDispatch();
+
+  const defineCurrentPost = (e) => {
+    debugger
+    dispatch(currentPost(props));
+    e.preventDefault()
+  }
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -34,8 +44,8 @@ export default function CardPost(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-         <Link to='/posts/post'>Details</Link> 
+        <Button size="small" color="primary" onClick={defineCurrentPost}>
+         <Link to={`/posts/${userId}/post/${id}`}>Details</Link> 
         </Button>
       </CardActions>
     </Card>

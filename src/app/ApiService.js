@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 
-export default class SwService {
+export default class ApiService {
 
     baseUrl = 'https://jsonplaceholder.typicode.com';
 
@@ -20,8 +20,14 @@ export default class SwService {
         return posts;
     }
 
-    postPost = async (post, {id}) => {
+    addNewPost = async (post, {userId}) => {
         debugger
-        return axios.post(`${this.baseUrl}/posts?userId=${id}`, post)
+        return axios.post(`${this.baseUrl}/posts?userId=${userId}`, post)
     }
+
+    getComments = async (postId) => {
+        const comments = await this.getInfo(`/comments?postId=${postId}`);
+        return comments;
+    }
+    
 }

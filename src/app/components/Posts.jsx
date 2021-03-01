@@ -1,18 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {
-  Link,
   useParams
 } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import {fetchPosts, postPost} from './../actions.js';
+import {fetchPosts, addNewPost} from './../actions/postsActions';
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
 import CardPost from './CardPost';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import SwService from './../SwService';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -21,8 +19,8 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const service = new SwService();
-export default function Posts(props) {
+
+export default function Posts() {
   const classes = useStyles();
 
   const {id} = useParams();
@@ -38,14 +36,14 @@ export default function Posts(props) {
 
   const onSubmit = (e) => {
     debugger
-    e.preventDefault();
-      dispatch(postPost(newPostValue, {id}))
-  
+      dispatch(addNewPost(newPostValue, {id}))
+      setNewPostValue({body: "", title: ""});
+      e.preventDefault();
   }
 
   const handleFormInput = (keyName, e) => {
     setNewPostValue(prevState => {
-        return ({...prevState, [keyName]: e.target.value})
+        return ({...prevState, [keyName]: e.target.value, userId: id})
     })
   }
 

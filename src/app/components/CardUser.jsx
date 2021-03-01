@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Link
 } from "react-router-dom";
+import {useSelector, useDispatch} from 'react-redux';
+import {currentUser} from './../actions/userActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -25,6 +27,12 @@ export default function CardUser(props) {
   const classes = useStyles();
   
   const { id, name, username, email } = props;
+  const dispatch = useDispatch();
+
+  const defineCurrentUser = () => {
+    debugger
+    dispatch(currentUser(props))
+  }
 
   return (
     <Card className={classes.root}>

@@ -1,43 +1,45 @@
 
 const initialState = {
     posts: [],
+    currentPost: {},
     post: {},
     error: ""
 }
 
 export default (state = initialState, action) => {
-    debugger
-    switch(action.type) {
-        
-        case 'FETCH_POSTS_REQUEST':
-            return{
-                ...state
-            };
+    switch (action.type) {
         case 'FETCH_POSTS_SUCCESS':
-            return{
+            return {
                 ...state,
                 posts: action.posts,
                 error: ''
             };
         case 'FETCH_POSTS_ERROR':
-            return{
+            return {
                 ...state,
                 posts: [],
                 error: action.error
             };
+        // case 'POST_REQUEST_SUCCESS':
+        //     let newState = { ...state }
+        //     newState.posts.push(action.post.data)
+        //     return newState;
         case 'POST_REQUEST_SUCCESS':
-            let newState = state.posts.concat(action.post.data);
+            let newState = { ...state } //copy of existing state
+            newState.posts = [...newState.posts, action.post.data]
             return newState;
-        case 'FPOST_REQUEST_ERROR':
-            return{
+        case 'POST_REQUEST_ERROR':
+            return {
                 ...state,
                 post: {},
                 error: action.error
             };
-        // case 'ADD_NEW_POST':
-        //     let newState = state.posts;
-        //     newState.push(action.post);
-        //     return newState;
+        case 'CURRENT_POST':
+            debugger
+            return {
+                ...state,
+                currentPost: action.currentPost
+            }
         default:
             return state;
     }
