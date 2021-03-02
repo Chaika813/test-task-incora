@@ -22,10 +22,10 @@ function App() {
           <Route exact path="/posts/:id">
             <Posts />
           </Route>
-          <Route path="/posts/:id/post/:postId">
+          <Route exact path="/posts/:id/post/:postId">
             <Post />
           </Route>
-          <Route sensitive path="/posts/:id/post/:postId/edit">
+          <Route  path="/posts/:id/post/:postId/edit">
             <PostEdit />
           </Route>
         </Switch>

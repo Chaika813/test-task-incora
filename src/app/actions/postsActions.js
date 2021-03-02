@@ -16,11 +16,10 @@ export const postRequestError = (post) => {
 }
 
 
-export const addNewPost = (post, id) => {
+export const addNewPost = (post) => {
     return (dispatch) => {
-        service.addNewPost(post, id).then(response => {
+        service.addNewPost(post).then(response => {
             const post = response;
-            console.log(post);
             dispatch(postRequestSuccess(post))
         })
         .catch(error => {
@@ -61,20 +60,36 @@ export const fetchPosts = ({id}) => {
     }
 }
 
-export const editPost = (postId, id, title, body ) => {
+export const updatePost = (post) => {
     return{
-        type: "EDIT_COMMENT",
-        postId, 
-        id, 
-        title, 
-        body
+        type: "PUT_POST",
+        post
+    }
+}
+
+export const editPost = (post) => {
+    debugger
+    return (dispatch) => {
+        service.updatePost(post).then(response => {
+            const updatedPost = response;
+            dispatch(updatePost(updatedPost))
+        })
     }
 }
 
 export const deletePost = (postId) => {
-    return{
-        type: "EDIT_COMMENT",
-        postId
+    return (dispatch) => {
+        service.deletePost(postId).then(response => {
+            dispatch({
+                type: "DELETE_POST",
+                postId
+            })
+            alert(`Post with id ${postId} deleted successfully`)
+        })
+        .catch(error => {
+            const errMes = error.message;
+            console.log(errMes)
+        })
     }
 }
 

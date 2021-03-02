@@ -20,12 +20,8 @@ export default (state = initialState, action) => {
                 posts: [],
                 error: action.error
             };
-        // case 'POST_REQUEST_SUCCESS':
-        //     let newState = { ...state }
-        //     newState.posts.push(action.post.data)
-        //     return newState;
         case 'POST_REQUEST_SUCCESS':
-            let newState = { ...state } //copy of existing state
+            let newState = { ...state }
             newState.posts = [...newState.posts, action.post.data]
             return newState;
         case 'POST_REQUEST_ERROR':
@@ -35,10 +31,21 @@ export default (state = initialState, action) => {
                 error: action.error
             };
         case 'CURRENT_POST':
-            debugger
             return {
                 ...state,
                 currentPost: action.currentPost
+            };
+        case "PUT_POST":
+            return {
+                ...state,
+                currentPost: action.post.data
+            };
+        case 'DELETE_POST':
+            debugger
+            return {
+                ...state,
+                posts: state.posts.filter(x => x.id !== action.postId),
+                currentPost: {}
             }
         default:
             return state;

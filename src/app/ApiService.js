@@ -20,14 +20,21 @@ export default class ApiService {
         return posts;
     }
 
-    addNewPost = async (post, {userId}) => {
-        debugger
-        return axios.post(`${this.baseUrl}/posts?userId=${userId}`, post)
+    addNewPost = async (post) => {
+        return axios.post(`${this.baseUrl}/posts?userId=${post.userId}`, post)
     }
 
     getComments = async (postId) => {
         const comments = await this.getInfo(`/comments?postId=${postId}`);
         return comments;
+    }
+
+    updatePost = async (post) => {
+        return axios.put(`${this.baseUrl}/posts/${post.id}`, post)
+    }
+
+    deletePost = async (postId) => {
+        return axios.delete(`${this.baseUrl}/posts/${postId}`)
     }
     
 }

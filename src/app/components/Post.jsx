@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import { fetchComments } from './../actions/commentActions';
-import PostEdit from './PostEdit';
+import { deletePost } from './../actions/postsActions';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Comment from './Comment';
@@ -22,13 +22,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EditIcon from '@material-ui/icons/Edit';
 import Container from "@material-ui/core/Container";
 
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: '100%',
     marginTop: '4em'
-  },
-  media: {
-    height: 0,
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -48,14 +47,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard() {
   const classes = useStyles();
-
+  const history = useHistory();
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const { postId } = useParams();
+  const { postId, id } = useParams();
   const comments = useSelector(state => state.commentsReducer.comments);
   const currentUser = useSelector(state => state.usersReducer.user);
   const currentPost = useSelector(state => state.postsReducer.currentPost);
@@ -63,6 +62,11 @@ export default function RecipeReviewCard() {
   useEffect(() => {
     dispatch(fetchComments({ postId }))
   }, [])
+
+  const handleDeletePost = () => {
+    dispatch(deletePost(postId));
+    history.push(`/posts/${id}`)
+  }
 
 
   return (
@@ -72,7 +76,7 @@ export default function RecipeReviewCard() {
           avatar={
             <Typography aria-label="recipe" className={classes.avatar}>
               {currentUser.email}
-          </Typography>
+            </Typography>
           }
           title={currentPost.title}
           subheader={currentUser.username}
@@ -80,13 +84,13 @@ export default function RecipeReviewCard() {
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             {currentPost.body}
-        </Typography>
+          </Typography>
         </CardContent>
         <CardActions disableSpacing>
           <Button aria-label="edit">
             <Link to={`/posts/${currentUser.id}/post/${currentPost.id}/edit`}> <EditIcon /></Link>
           </Button>
-          <IconButton aria-label="share">
+          <IconButton aria-label="share" onClick={handleDeletePost}>
             <DeleteIcon />
           </IconButton>
           <IconButton
@@ -104,11 +108,11 @@ export default function RecipeReviewCard() {
           <CardContent>
             <Grid container justify="space-between" className={classes.spacing}>
               <Typography className={classes.header} variant="h6" gutterBottom>
-              {comments.map((comment) => {
-                return (
+                {comments.map((comment) => {
+                  return (
                     <Comment {...comment} />
                   )
-              })}
+                })}
               </Typography>
             </Grid>
           </CardContent>

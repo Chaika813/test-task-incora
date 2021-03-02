@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function Comment(props) {
+export default function (props) {
   const classes = useStyles();
 
   const { id, name, body, email } = props;

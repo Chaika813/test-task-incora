@@ -26,7 +26,6 @@ export default (state = initialState, action) => {
                 error: action.error
             };
         case 'CURRENT_USER':
-            debugger
             let newState ={...state};
             newState.user = action.user
             return newState;

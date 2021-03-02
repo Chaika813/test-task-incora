@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    minHeight: '35vh'
   },
 });
 
@@ -26,7 +27,6 @@ export default function CardPost(props) {
   const dispatch = useDispatch();
 
   const defineCurrentPost = (e) => {
-    debugger
     dispatch(currentPost(props));
     e.preventDefault()
   }

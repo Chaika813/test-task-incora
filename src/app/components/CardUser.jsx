@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {useSelector, useDispatch} from 'react-redux';
 import {currentUser} from './../actions/userActions';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,10 +13,8 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
+    maxHeight: 500
+  }
 });
 
 
@@ -30,7 +26,6 @@ export default function CardUser(props) {
   const dispatch = useDispatch();
 
   const defineCurrentUser = () => {
-    debugger
     dispatch(currentUser(props))
   }
 

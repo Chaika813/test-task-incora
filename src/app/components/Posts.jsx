@@ -35,8 +35,7 @@ export default function Posts() {
   }, [])
 
   const onSubmit = (e) => {
-    debugger
-      dispatch(addNewPost(newPostValue, {id}))
+      dispatch(addNewPost(newPostValue))
       setNewPostValue({body: "", title: ""});
       e.preventDefault();
   }
