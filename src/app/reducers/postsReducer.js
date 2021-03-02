@@ -41,7 +41,6 @@ export default (state = initialState, action) => {
                 currentPost: action.post.data
             };
         case 'DELETE_POST':
-            debugger
             return {
                 ...state,
                 posts: state.posts.filter(x => x.id !== action.postId),

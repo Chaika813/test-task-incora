@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Link
 } from "react-router-dom";
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import {currentPost} from './../actions/postsActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';

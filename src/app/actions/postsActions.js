@@ -31,8 +31,6 @@ export const addNewPost = (post) => {
 
 
 
-
-
 export const fetchPostsSuccess = (posts) => {
     return{
         type: "FETCH_POSTS_SUCCESS",

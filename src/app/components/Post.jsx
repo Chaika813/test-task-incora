@@ -59,12 +59,18 @@ export default function RecipeReviewCard() {
   const currentUser = useSelector(state => state.usersReducer.user);
   const currentPost = useSelector(state => state.postsReducer.currentPost);
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(fetchComments({ postId }))
   }, [])
 
   const handleDeletePost = () => {
     dispatch(deletePost(postId));
+    history.push(`/posts/${id}`)
+  }
+
+  const backToPosts = () => {
     history.push(`/posts/${id}`)
   }
 
@@ -103,6 +109,7 @@ export default function RecipeReviewCard() {
           >
             <ExpandMoreIcon />
           </IconButton>
+          <Button onClick={backToPosts}>Back</Button>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>

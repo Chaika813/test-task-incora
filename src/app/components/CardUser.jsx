@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import {useSelector, useDispatch} from 'react-redux';
+import { useDispatch} from 'react-redux';
 import {currentUser} from './../actions/userActions';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
